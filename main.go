@@ -16,28 +16,29 @@ func main() {
 	//fmt.Println("請問要抽出幾個？")
 	//fmt.Scanf("%d", &count)
 	time.Sleep(5000)
-	SetMaxAmountOfBalls(num)
-	check := 0
-	for {
-		fmt.Scanf("%d", &check)
-		Shuffle(MaxAmountOfBallsSlice)
-		fmt.Println(MaxAmountOfBallsSlice)
+	Lottery := Lottery{num}
+	Lottery.SetMaxAmountOfBalls()
+	/*check := 0
+	/*for {
 		if check != 0{
 			break
-		}	
-	}
-	Shuffle(MaxAmountOfBallsSlice)
-	
-	/*for {
-		fmt.Println("請問抽獎嗎（抽請輸入：0)")
-		fmt.Scanf("%d", &num)
-		if num == 0{
-			fmt.Println(len(MaxAmountOfBallsSlice))
-			MaxAmountOfBallsSlice = GetOneNumber(MaxAmountOfBallsSlice)
-			fmt.Println("剩餘",MaxAmountOfBallsSlice)
-		}else{
-			return
 		}
+		fmt.Scanf("%d", &check)
+		Lottery.Shuffle()
+		Lottery.ShowmaxAmountOfBallsSlice()
 	}*/
+
+	
+	for {
+		//fmt.Println("請問要抽獎嗎（抽請輸入：0，不抽請輸入：1)")
+		result,status := Lottery.GetOneNumber()
+		fmt.Println("抽到",result)
+		fmt.Print("抽獎機內目前剩餘")
+		Lottery.ShowmaxAmountOfBallsSlice()
+		if status != ""{
+			fmt.Println("抽完囉")
+			break
+		}
+	}
 
 }

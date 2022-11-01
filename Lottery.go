@@ -5,44 +5,53 @@ import (
 	"math/rand"
 	"time"
 )
+type Lottery struct{
+	MaxAmountOfBalls int
+}
+// 封裝
+var maxAmountOfBallsSlice []int
 
-var MaxAmountOfBallsSlice []int
+func (l *Lottery)ShowmaxAmountOfBallsSlice(){
+	fmt.Println(maxAmountOfBallsSlice)
+}
 
-func SetMaxAmountOfBalls(Max int){
+func (l *Lottery)SetMaxAmountOfBalls(){
 
 	i := 1
-	for i <= Max{
-		MaxAmountOfBallsSlice = append(MaxAmountOfBallsSlice, i)
+	for i <= l.MaxAmountOfBalls{
+		maxAmountOfBallsSlice = append(maxAmountOfBallsSlice, i)
 		i ++
 	}
-	fmt.Println(MaxAmountOfBallsSlice)
+	fmt.Println("目前抽獎機號碼：",maxAmountOfBallsSlice)
 	
 }
 
 
-func Shuffle(slice []int)[]int{
+func (l *Lottery)Shuffle()[]int{
 	//rand.Seed(time.Now().UnixNano())
 	//rand.Shuffle(len(slice), func(i, j int) { slice[i], slice[j] = slice[j], slice[i] })
 
-	for i := len(slice) - 1; i > 0; i-- { // Fisher–Yates shuffle
+	for i := len(maxAmountOfBallsSlice) - 1; i > 0; i-- {
 		j := rand.Intn(i + 1)
-		slice[i], slice[j] = slice[j], slice[i]
+		maxAmountOfBallsSlice[i], maxAmountOfBallsSlice[j] = maxAmountOfBallsSlice[j], maxAmountOfBallsSlice[i]
 	}
-	return slice
+	return maxAmountOfBallsSlice
 }
 
-func GetOneNumber(slice []int)[]int{
-	if len(slice) == 1 {
-		fmt.Println("抽完囉")
-		return slice
+func (l *Lottery) GetOneNumber()(int,string){
+	if len(maxAmountOfBallsSlice) == 1 {
+		return maxAmountOfBallsSlice[0],"no more any num"
 	}
 	rand.Seed(time.Now().UnixNano())
-	num := rand.Intn(len(slice))
-	fmt.Println("抽到",slice[num])
-	for i := 0;i<=len(slice)-1;i++{
-		if slice[num] == slice[i]{
-			slice[i] = slice[len(slice)-1]
+	num := rand.Intn(len(maxAmountOfBallsSlice))
+	result := maxAmountOfBallsSlice[num]
+
+	for i := 0;i<=len(maxAmountOfBallsSlice)-1;i++{
+		if maxAmountOfBallsSlice[num] == maxAmountOfBallsSlice[i]{
+			maxAmountOfBallsSlice[num] = maxAmountOfBallsSlice[len(maxAmountOfBallsSlice)-1]
 		}
 	}
-	return slice[:len(slice)-1]
+	maxAmountOfBallsSlice = maxAmountOfBallsSlice[:len(maxAmountOfBallsSlice)-1]
+	
+	return result,""
 }
