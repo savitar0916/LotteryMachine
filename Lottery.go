@@ -16,14 +16,9 @@ func (l *Lottery)ShowmaxAmountOfBallsSlice(){
 }
 
 func (l *Lottery)SetMaxAmountOfBalls(){
-
-	i := 1
-	for i <= l.MaxAmountOfBalls{
+	for i := 1; i <= l.MaxAmountOfBalls; i++ {
 		maxAmountOfBallsSlice = append(maxAmountOfBallsSlice, i)
-		i ++
 	}
-	fmt.Println("目前抽獎機號碼：",maxAmountOfBallsSlice)
-	
 }
 
 
