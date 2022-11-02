@@ -13,7 +13,8 @@ func main() {
 	//var count int
 	//fmt.Println("請問最大的數字為？")
 	//fmt.Scanf("%d", &num)
-	Lottery := Lottery{100000}
+	Lottery := new (Lottery)
+	Lottery.Init(10)
 	Lottery.SetMaxAmountOfBalls()
 	/*check := 0
 	/*for {

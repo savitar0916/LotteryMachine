@@ -5,8 +5,12 @@ import (
 	"math/rand"
 	"time"
 )
+
 type Lottery struct{
 	MaxAmountOfBalls int
+}
+func (l *Lottery) Init(Balls int) {
+	l.MaxAmountOfBalls = Balls
 }
 // 封裝
 var maxAmountOfBallsSlice []int
@@ -40,13 +44,13 @@ func (l *Lottery) GetOneNumber()(int,string){
 	rand.Seed(time.Now().UnixNano())
 	num := rand.Intn(len(maxAmountOfBallsSlice))
 	result := maxAmountOfBallsSlice[num]
-
-	for i := 0;i<=len(maxAmountOfBallsSlice)-1;i++{
+	maxAmountOfBallsSlice = append(maxAmountOfBallsSlice[:num],maxAmountOfBallsSlice[num+1:]... )
+	/*for i := 0;i<=len(maxAmountOfBallsSlice)-1;i++{
 		if maxAmountOfBallsSlice[num] == maxAmountOfBallsSlice[i]{
 			maxAmountOfBallsSlice[num] = maxAmountOfBallsSlice[len(maxAmountOfBallsSlice)-1]
 		}
 	}
 	maxAmountOfBallsSlice = maxAmountOfBallsSlice[:len(maxAmountOfBallsSlice)-1]
-	
+	*/
 	return result,""
 }
