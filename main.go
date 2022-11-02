@@ -14,7 +14,7 @@ func main() {
 	//fmt.Println("請問最大的數字為？")
 	//fmt.Scanf("%d", &num)
 	Lottery := new (Lottery)
-	Lottery.Init(10)
+	Lottery.Init(100000)
 	Lottery.SetMaxAmountOfBalls()
 	/*check := 0
 	/*for {
